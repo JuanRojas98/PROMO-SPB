@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Gotham Condensed';
+    src: url('../fonts/GothamCond-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gotham Condensed';
+    src: url('../fonts/GothamCond-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gotham Condensed';
+    src: url('../fonts/GothamCond-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gotham Condensed';
+    src: url('../fonts/GothamCond-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+.bg-app {
+    background: linear-gradient(180deg, #006E47 0%, #003B23 100%);
+}
+
+.title-stroke {
+    color: transparent;
+    -webkit-text-stroke: 2px #FFC107; /* amarillo */
+}
+
+.title-stroke-white {
+    color: transparent;
+    -webkit-text-stroke: 2px #FFFFFF; /* amarillo */
+}
+
+.bg-game {
+    background-image: url('/storage/app/public/images/Fondo1.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Tablets y celulares */
+@media (max-width: 1024px) {
+    .bg-game {
+        background-image: url('/storage/app/public/images/Fondo1_movil.jpeg');
+        background-attachment: scroll;
+    }
+}
+
+/**
+    SweetAlert2
+ */
+.swal2-popup {
+    @apply rounded-2xl
+}
+
+.swal2-title {
+    @apply text-5xl font-black text-black
+}
+
+.swal2-html-container {
+    @apply text-2xl font-medium
+}
+
+.swal2-confirm, .swal2-cancel {
+    @apply py-2 px-5 text-[25px] text-center font-bold rounded-xl
+}
+
+.swal2-confirm {
+    @apply bg-primary text-white hover:bg-primary hover:opacity-90 transition-all
+}
