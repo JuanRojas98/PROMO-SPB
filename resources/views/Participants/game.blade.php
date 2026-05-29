@@ -1,6 +1,6 @@
 <x-game-layout>
     @vite(['resources/css/game.css', 'resources/js/game/app.js'])
-    <div>
+    <div class="w-full md:w-[500px] h-screen">
         <div style="font-family: font1; position: absolute; left:-1000px; visibility:hidden;">.</div>
         <div id="game-container"></div>
         <input type="hidden" id="invoice_id" value="{{ $invoice_id }}">
