@@ -29,7 +29,7 @@ Route::middleware(['auth', 'role:participant'])
     /**
      * HOME ROUTES
      */
-    Route::view('/', 'participants.home')
+    Route::view('/', 'Participants.home')
         ->name('home');
 
     /**

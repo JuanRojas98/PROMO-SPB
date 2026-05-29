@@ -26,7 +26,7 @@
                     @if ($invoice_file)
                         <img src="{{ $invoice_file->temporaryUrl() }}" class="w-[85px] h-[85px]">
                     @else
-                        <img src="{{ asset('storage/images/upload_icon.png') }}" class="w-[85px] h-[85px] opacity-30">
+                        <img src="{{ asset('images/upload_icon.png') }}" class="w-[85px] h-[85px] opacity-30">
                     @endif
                 </label>
 
