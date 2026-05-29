@@ -25,7 +25,7 @@
             <div class="flex">
                 @if (Auth::user())
                     <div class="w-[160px] lg:w-[230px] p-2 rounded-full border border-white flex justify-center gap-2">
-                        <img src="{{ asset('storage/images/usuario.png') }}" class="w-[25px] h-[25px]">
+                        <img src="{{ asset('images/usuario.png') }}" class="w-[25px] h-[25px]">
                         <span class="font-semibold text-white uppercase text-center text-xl 2xl:text-2xl">
                             {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}
                         </span>
@@ -33,24 +33,24 @@
                 @endif
             </div>
             <div class="flex justify-between items-center gap-5">
-                <img src="{{ asset('storage/images/logo_black_flag.png') }}" class="w-[46px] lg:w-[80px] 2xl:w-[132px]">
-                <img src="{{ asset('storage/images/logo_rapid_repel.png') }}" class="w-[46px] lg:w-[80px] 2xl:w-[132px]">
+                <img src="{{ asset('images/logo_black_flag.png') }}" class="w-[46px] lg:w-[80px] 2xl:w-[132px]">
+                <img src="{{ asset('images/logo_rapid_repel.png') }}" class="w-[46px] lg:w-[80px] 2xl:w-[132px]">
             </div>
         </header>
 
         <div class="min-h-screen grid grid-flow-col grid-rows-2 gap-4 lg:grid-rows-1 lg:grid-cols-2">
             <div class="relative w-full h-screen lg:h-full overflow-hidden">
                 <!-- Imagen fondo Movil -->
-                <img src="{{ asset('storage/images/Joven_movil.png') }}"
+                <img src="{{ asset('images/Joven_movil.png') }}"
                      class="absolute inset-0 w-full h-full lg:hidden">
 
                 <!-- Imagen fondo Escritorio -->
-                <img src="{{ asset('storage/images/Joven.png') }}"
+                <img src="{{ asset('images/Joven.png') }}"
                     class="absolute inset-0 w-full h-full hidden lg:block">
 
                 <!-- Logo fijo -->
                 <div class="absolute bottom-0 lg:bottom-16 left-1/2 -translate-x-1/2 z-50">
-                    <img src="{{ asset('storage/images/logo.png') }}"
+                    <img src="{{ asset('images/logo.png') }}"
                         class="block lg:hidden max-w-none w-[240px] md:w-[340px] lg:w-[480px] object-contain drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] z-50">
                 </div>
             </div>

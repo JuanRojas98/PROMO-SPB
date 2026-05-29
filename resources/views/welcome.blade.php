@@ -2,15 +2,15 @@
     <div class="flex flex-col w-auto">
         <div class="flex flex-col gap-3">
             <div class="flex justify-center">
-                <img src="{{ asset('storage/images/compra.png') }}"
+                <img src="{{ asset('images/compra.png') }}"
                     class="w-[279px] md:w-[350px] 2xl:w-[467px]">
             </div>
             <div class="flex justify-center">
-                <img src="{{ asset('storage/images/registra_tu_compra.png') }}"
+                <img src="{{ asset('images/registra_tu_compra.png') }}"
                     class="w-[279px] md:w-[350px] 2xl:w-[467px]">
             </div>
             <div class="flex justify-center">
-                <img src="{{ asset('storage/images/juega_y_gana.png') }}"
+                <img src="{{ asset('images/juega_y_gana.png') }}"
                      class="w-[279px] md:w-[350px] 2xl:w-[467px]">
             </div>
         </div>
