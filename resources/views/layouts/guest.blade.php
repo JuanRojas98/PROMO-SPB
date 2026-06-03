@@ -38,8 +38,8 @@
             </div>
         </header>
 
-        <div class="min-h-screen grid grid-flow-col grid-rows-2 gap-4 lg:grid-rows-1 lg:grid-cols-2">
-            <div class="relative w-full h-screen lg:h-full overflow-hidden">
+        <div class="lg:min-h-screen lg:grid gap-4 lg:grid-rows-1 lg:grid-cols-2">
+            <div class="relative w-full h-[300px] md:h-[500px] lg:h-full overflow-hidden">
                 <!-- Imagen fondo Movil -->
                 <img src="{{ asset('images/Joven_movil.png') }}"
                      class="absolute inset-0 w-full h-full lg:hidden">
@@ -54,8 +54,19 @@
                         class="block lg:hidden max-w-none w-[240px] md:w-[340px] lg:w-[480px] object-contain drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] z-50">
                 </div>
             </div>
-            <div class="relative flex justify-center items-center p-5 md:p-8">
+            <div class="relative flex flex-col @if (!request()->routeIs('register')) lg:flex-row @endif
+                justify-center items-center py-5 px-5 md:px-0">
                 {{ $slot }}
+
+                <div class="mt-8 @if (!request()->routeIs('register')) lg:mt-0 lg:absolute lg:bottom-5 md:px-5 @endif">
+                    <p class="text-xs text-white">
+                        "Lea la etiqueta antes de usar el producto", "Ningún envase o empaque que haya contenido plaguicidas puede
+                        usarse para contener alimentos o agua, para consumo humano y animal" y "Manténgase fuera del alcance de los
+                        niños, alejado de animales y alimento". "Este(os) producto(s) no puede(n) aplicarse sobre las personas,
+                        plantas ni animales, tampoco sobre los alimentos" y "Después de la aplicación debe esperar el tiempo recomendado
+                        en la etiqueta antes de ingresar al lugar"
+                    </p>
+                </div>
             </div>
         </div>
 

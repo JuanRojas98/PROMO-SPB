@@ -42,6 +42,7 @@ Route::middleware(['auth', 'role:participant'])
      * GAME ROUTES
      */
     Route::view('/game/{invoice_id}', 'Participants.game')
+        ->middleware('game')
         ->name('game');
 
     Route::post('/game/score', [GameController::class, 'store'])
