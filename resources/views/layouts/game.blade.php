@@ -40,6 +40,12 @@
     <div class="min-h-screen flex justify-center items-center">
         <div ></div>
         <div class="relative flex justify-center items-center">
+            <div class="absolute top-5 -left-10 z-50">
+                <a href="{{ route('participants.home') }}" class="cursor-pointer">
+                    <img src="{{ asset('images/arrow-left.png') }}" class="w-[20px]">
+                </a>
+            </div>
+
             {{ $slot }}
         </div>
     </div>

@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome');
+Route::view('/', 'welcome')
+    ->middleware('guest')
+    ->name('welcome');
 
 /**
  * PARTICIPANTS ROUTES

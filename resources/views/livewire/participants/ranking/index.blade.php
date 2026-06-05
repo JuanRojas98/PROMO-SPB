@@ -8,7 +8,11 @@
     </h2>
     <p class="font-black text-[25px] md:text-[40px] text-center text-white mb-8 flex flex-col md:flex-row justify-center items-center">
         TERMINA EN
-        <span class="block w-[250px] bg-yellow text-black rounded-full md:ml-3">17:20:45</span>
+        <span class="block px-3 bg-yellow text-black rounded-full md:ml-3">
+            <span id="days">0</span> días
+            y
+            <span id="hours">0</span> hora(s)
+        </span>
     </p>
 
     <div class="w-full max-w-3xl bg-[#ECECEC] rounded-2xl shadow-lg p-6">
@@ -44,4 +48,42 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Fecha inicial: 15 de junio
+            const startDate = new Date('2026-06-15T00:00:00');
+            // Fecha final: 15 de julio
+            const endDate = new Date('2026-07-15T23:59:59');
+
+            function updateCountdown() {
+                const now = new Date();
+
+                // Antes del inicio
+                if (now < startDate) {
+                    document.getElementById('days').textContent = '0';
+                    document.getElementById('hours').textContent = '0';
+                    return;
+                }
+
+                // Después de finalizar
+                if (now > endDate) {
+                    document.getElementById('days').textContent = '0';
+                    document.getElementById('hours').textContent = '0';
+                    return;
+                }
+
+                const diff = endDate - now;
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+
+                document.getElementById('days').textContent = days;
+                document.getElementById('hours').textContent = hours
+            }
+
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        });
+    </script>
 </div>

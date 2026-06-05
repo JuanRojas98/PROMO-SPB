@@ -99,35 +99,35 @@ class extends Component {
                 <label for="first_name"
                        class="font-bold text-[20px] text-white ml-2 mb-1">Nombres</label>
                 <input type="text" id="first_name" name="first_name" wire:model="first_name"
-                       class="py-1 px-5 bg-white rounded-lg text-lg" required autofocus>
+                       class="py-1 px-5 bg-white rounded-lg text-lg" placeholder="Juan" required autofocus>
                 <x-input-error :messages="$errors->get('first_name')" class="mt-2"/>
             </div>
             <div class="col-span-2 flex flex-col mb-1">
                 <label for="last_name"
                        class="font-bold text-[20px] text-white ml-2 mb-1">Apellidos</label>
                 <input type="text" id="last_name" name="last_name" wire:model="last_name"
-                       class="py-1 px-5 bg-white rounded-lg text-lg" required>
+                       class="py-1 px-5 bg-white rounded-lg text-lg" placeholder="Perez" required>
                 <x-input-error :messages="$errors->get('last_name')" class="mt-2"/>
             </div>
             <div class="col-span-2 flex flex-col mb-1">
                 <label for="email"
                        class="font-bold text-[20px] text-white ml-2 mb-1">Correo</label>
                 <input type="email" id="email" name="email" wire:model="email"
-                       class="py-1 px-5 bg-white rounded-lg text-lg" required>
+                       class="py-1 px-5 bg-white rounded-lg text-lg" placeholder="correo@correo.com" required>
                 <x-input-error :messages="$errors->get('email')" class="mt-2"/>
             </div>
             <div class="col-span-2 flex flex-col mb-1">
                 <label for="phone"
                        class="font-bold text-[20px] text-white ml-2 mb-1">Teléfono</label>
-                <input type="text" id="phone" name="phone" wire:model="phone"
-                       class="py-1 px-5 bg-white rounded-lg text-lg" required>
+                <input type="number" id="phone" name="phone" wire:model="phone"
+                       class="py-1 px-5 bg-white rounded-lg text-lg" min="0" placeholder="311*******" required>
                 <x-input-error :messages="$errors->get('phone')" class="mt-2"/>
             </div>
             <div class="col-span-2 flex flex-col mb-1">
                 <label for="document"
                        class="font-bold text-[20px] text-white ml-2 mb-1">Cédula</label>
-                <input type="text" id="document" name="document" wire:model="document"
-                       class="py-1 px-5 bg-white rounded-lg text-lg" required>
+                <input type="number" id="document" name="document" wire:model="document"
+                       class="py-1 px-5 bg-white rounded-lg text-lg" min="0" placeholder="101*******" required>
                 <x-input-error :messages="$errors->get('document')" class="mt-2"/>
             </div>
             <div class="flex flex-col mb-2 mr-1">

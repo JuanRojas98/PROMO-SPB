@@ -17,9 +17,6 @@ new #[Layout('layouts.guest')] class extends Component
             'email' => ['required', 'string', 'email'],
         ]);
 
-        // We will send the password reset link to this user. Once we have attempted
-        // to send the link, we will examine the response then see the message we
-        // need to show to the user. Finally, we'll send out a proper response.
         $status = Password::sendResetLink(
             $this->only('email')
         );
@@ -37,25 +34,30 @@ new #[Layout('layouts.guest')] class extends Component
 }; ?>
 
 <div>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+    <div class="mb-4 text-white text-xl">
+        {{ __('Ingresa tu dirección de correo electrónico y te enviaremos un enlace para restablecerla.') }}
     </div>
 
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <form wire:submit="sendPasswordResetLink">
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <div class="flex flex-col mb-3">
+            <label for="email" class="font-bold text-[24px] text-white ml-5 mb-2">Correo</label>
+            <input type="email" id="email" name="email" wire:model="email"
+                   class="py-2 px-5 bg-white rounded-full text-xl" placeholder="correo@correo.com" required autofocus>
+            <x-input-error :messages="$errors->get('email')" class="mt-2"/>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
+        <div class="flex justify-center items-center mt-5 mb-5">
+            <button type="submit"
+                class="w-[180px] 2xl:w-[250px] rounded-xl bg-yellow text-green-dark text-[30px] 2xl:text-[40px] text-center font-bold"
+                wire:target="sendPasswordResetLink"
+                wire:loading.class="opacity-75 pointer-events-none">
+                <div wire:loading wire:target="sendPasswordResetLink"
+                     class="w-4 h-4 border-4 border-white border-t-transparent mr-2 rounded-full animate-spin"></div>
+                ENVIAR
+            </button>
         </div>
     </form>
 </div>

@@ -21,25 +21,10 @@
             message="Cargando aplicación..."
         />
 
-        <header class="absolute top-0 left-0 z-30 w-full py-2 px-5 lg:px-8 flex justify-between items-center">
-            <div class="flex">
-                @if (Auth::user())
-                    <div class="w-[160px] lg:w-[230px] p-2 rounded-full border border-white flex justify-center gap-2">
-                        <img src="{{ asset('images/usuario.png') }}" class="w-[25px] h-[25px]">
-                        <span class="font-semibold text-white uppercase text-center text-xl 2xl:text-2xl">
-                            {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}
-                        </span>
-                    </div>
-                @endif
-            </div>
-            <div class="flex justify-between items-center gap-5">
-                <img src="{{ asset('images/logo_black_flag.png') }}" class="w-[46px] lg:w-[80px] 2xl:w-[132px]">
-                <img src="{{ asset('images/logo_rapid_repel.png') }}" class="w-[46px] lg:w-[80px] 2xl:w-[132px]">
-            </div>
-        </header>
+        <livewire:layout.navigation-guest/>
 
         <div class="lg:min-h-screen lg:grid gap-4 lg:grid-rows-1 lg:grid-cols-2">
-            <div class="relative w-full h-[300px] md:h-[500px] lg:h-full overflow-hidden">
+            <div class="relative w-full h-[300px] md:h-[500px] lg:h-full">
                 <!-- Imagen fondo Movil -->
                 <img src="{{ asset('images/Joven_movil.png') }}"
                      class="absolute inset-0 w-full h-full lg:hidden">
@@ -56,6 +41,15 @@
             </div>
             <div class="relative flex flex-col @if (!request()->routeIs('register')) lg:flex-row @endif
                 justify-center items-center py-5 px-5 md:px-0">
+                @if (Auth::user())
+                    @if (!request()->routeIs('participants.home'))
+                        <div class="absolute top-20 -left-10 z-50">
+                            <a href="{{ route('participants.home') }}" class="cursor-pointer">
+                                <img src="{{ asset('images/arrow-left.png') }}" class="w-[20px]">
+                            </a>
+                        </div>
+                    @endif
+                @endif
                 {{ $slot }}
 
                 <div class="mt-8 @if (!request()->routeIs('register')) lg:mt-0 lg:absolute lg:bottom-5 md:px-5 @endif">
