@@ -1,6 +1,8 @@
-<div class="w-full lg:w-[700px] 2xl:w-[800px]">
+<div class="w-full px-5 md:px-0 lg:w-[700px] 2xl:w-[800px]">
     <p class="font-semibold text-[28px] md:text-[48px] text-center text-white mb-0">
-        {{ number_format($currentUserPoints) }} PTS
+        <span class="text-green-400">{{ number_format($currentUserPoints) }} PTS (Aprobados)</span>
+        |
+        <span class="text-yellow">{{ number_format($currentUserPointsPending) }} PTS (Pendientes)</span>
     </p>
     <h2 class="relative font-bold text-[48px] md:text-[70px] 2xl:text-[80px] text-center title-stroke tracking-wider mb-3">
         CLASIFICACIÓN:
@@ -9,7 +11,7 @@
     <p class="font-black text-[25px] md:text-[40px] text-center text-white mb-8 flex flex-col md:flex-row justify-center items-center">
         TERMINA EN
         <span class="block px-3 bg-yellow text-black rounded-full md:ml-3">
-            <span id="days">0</span> días
+            <span id="days">0</span> día(s)
             y
             <span id="hours">0</span> hora(s)
         </span>

@@ -13,7 +13,7 @@
                 </label>
                 <input type="text" id="invoice_code" name="invoice_code" wire:model="invoice_code"
                        class="py-2 px-5 bg-white rounded-xl text-2xl text-center" placeholder="XXXX - XXXX -XXXX"
-                       required autofocus>
+                       required autofocus/>
                 <x-input-error :messages="$errors->get('invoice_code')" class="mt-2 text-xl text-red-500"/>
             </div>
             <div class="flex flex-col justify-center items-center p-5 border border-dashed border-white rounded-2xl">
@@ -30,17 +30,10 @@
                     @endif
                 </label>
 
-                <input
-                    type="file"
-                    id="invoice_file"
-                    wire:model="invoice_file"
-                    class="hidden"
-                    accept=".jpg, .jpeg, .png, .pdf, image/jpeg, image/png, application/pdf"
-                >
+                <input type="file" id="invoice_file" wire:model="invoice_file" class="hidden"
+                    accept=".jpg, .jpeg, .png, .pdf, image/jpeg, image/png, application/pdf"/>
 
-                <x-input-error
-                    class="mt-2 text-xl text-red-500"
-                    :messages="$errors->get('invoice_file')"
+                <x-input-error class="mt-2 text-xl text-red-500" :messages="$errors->get('invoice_file')"
                 />
             </div>
         </div>
@@ -55,8 +48,24 @@
                 ENVIAR
             </button>
         </div>
+
+        <div class="flex justify-center items-center mt-5">
+            <p class="text-lg text-yellow font-bold mb-0">
+                Recuerda que tus puntos entrán en un proceso de validación.
+            </p>
+        </div>
     </form>
 </div>
+
+@section('footer')
+    <p class="text-xs text-white">
+        "Lea la etiqueta antes de usar el producto", "Ningún envase o empaque que haya contenido plaguicidas puede
+        usarse para contener alimentos o agua, para consumo humano y animal" y "Manténgase fuera del alcance de los
+        niños, alejado de animales y alimento". "Este(os) producto(s) no puede(n) aplicarse sobre las personas,
+        plantas ni animales, tampoco sobre los alimentos" y "Después de la aplicación debe esperar el tiempo recomendado
+        en la etiqueta antes de ingresar al lugar"
+    </p>
+@endsection
 
 @script
 <script>

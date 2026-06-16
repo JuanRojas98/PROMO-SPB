@@ -3,7 +3,8 @@ export class MainScene extends Phaser.Scene {
         super({ key: 'MainScene' });
             this.state = 'READY'; // READY, SHOOTING, WAITING, GAMEOVER
             this.score = 0;
-            this.shots = 4;
+            this.shots = 2;
+            this.difficultyLevel = 0; // Aumenta con cada tiro
             this.invoiceId = null; // Asignar el ID del usuario antes de enviar
     }
 
@@ -54,7 +55,7 @@ export class MainScene extends Phaser.Scene {
 
         // 4. Interfaz de usuario (Textos)
         this.scoreText = this.add.text(18, 16, 'Goles: 0', { fontSize: '64px', fill: '#fff', fontStyle: 'bold', fontFamily: 'font1' }).setShadow(2, 2, '#000', 2);
-        this.shotsText = this.add.text(565, 16, 'Tiros: 4', { fontSize: '64px', fill: '#fff', fontStyle: 'bold', fontFamily: 'font1' }).setShadow(2, 2, '#000', 2);
+        this.shotsText = this.add.text(565, 16, 'Tiros: 2', { fontSize: '64px', fill: '#fff', fontStyle: 'bold', fontFamily: 'font1' }).setShadow(2, 2, '#000', 2);
         this.msgText = this.add.text(360, 750, '¡DESLIZA PARA PATEAR!', { fontSize: '52px', fill: '#ffeb3b', fontStyle: 'bold', fontFamily: 'font1' }).setOrigin(0.5).setShadow(3, 3, '#000', 4);
 
         // 5. Controles Táctiles (Swipe)
@@ -91,14 +92,20 @@ export class MainScene extends Phaser.Scene {
     }
 
     update() {
-        // Lógica de rebote del arquero
-        if (this.goalie.x > 570) {
-            this.goalie.setVelocityX(-Phaser.Math.Between(350, 600));
-        } else if (this.goalie.x < 150) {
-            this.goalie.setVelocityX(Phaser.Math.Between(350, 600));
-        }
+        // Mantener al arquero siempre dentro de los límites de la pantalla
+        this.goalie.x = Phaser.Math.Clamp(this.goalie.x, 80, 640);
 
         if (this.state === 'SHOOTING') {
+            // IA: el arquero sigue exclusivamente al balón durante el vuelo
+            const trackSpeed = 220 + this.difficultyLevel * 70;
+            if (this.ball.x < this.goalie.x - 18) {
+                this.goalie.setVelocityX(-trackSpeed);
+            } else if (this.ball.x > this.goalie.x + 18) {
+                this.goalie.setVelocityX(trackSpeed);
+            } else {
+                this.goalie.setVelocityX(0);
+            }
+
             // Rotar el balón mientras se mueve
             this.ball.rotation += 0.2;
 
@@ -110,6 +117,15 @@ export class MainScene extends Phaser.Scene {
             if (this.ball.y <= 620 || this.ball.x < -20 || this.ball.x > 740) {
                 this.evaluateShot();
             }
+        } else if (this.state === 'READY') {
+            // Lógica de rebote del arquero (velocidad escala con dificultad)
+            const minBounce = 650 + this.difficultyLevel * 55;
+            const maxBounce = 950 + this.difficultyLevel * 55;
+            if (this.goalie.x >= 640) {
+                this.goalie.setVelocityX(-Phaser.Math.Between(minBounce, maxBounce));
+            } else if (this.goalie.x <= 80) {
+                this.goalie.setVelocityX(Phaser.Math.Between(minBounce, maxBounce));
+            }
         }
     }
 
@@ -118,7 +134,8 @@ export class MainScene extends Phaser.Scene {
         this.state = 'WAITING';
 
         // Lógica de colisiones y resultados
-        let isTrapped = Math.abs(this.ball.x - this.goalie.x) < 85 && this.ball.y <= 620 && this.ball.y > 400;
+        const catchRadius = 90 + this.difficultyLevel * 14;
+        let isTrapped = Math.abs(this.ball.x - this.goalie.x) < catchRadius && this.ball.y <= 620 && this.ball.y > 400;
         let isPost = !isTrapped && this.ball.y <= 620 && (this.ball.x >= 20 && this.ball.x <= 35 || this.ball.x >= 685 && this.ball.x <= 700);
         let isGoal = !isTrapped && !isPost && (this.ball.x > 20 && this.ball.x < 700) && this.ball.y <= 620;
 
@@ -183,12 +200,17 @@ export class MainScene extends Phaser.Scene {
             this.msgText.setColor('#ffeb3b');
             this.goalie.setVelocity(0, 0);
             this.goalie.play('cry_anim');
-            this.sendResult();
+
+            setTimeout(() => {
+                this.sendResult();
+            }, 3000);
             return;
         }
 
+        this.difficultyLevel++;
         this.msgText.setText('');
-        this.goalie.setVelocityX(Phaser.Math.Between(350, 600));
+        const startSpeed = 400 + this.difficultyLevel * 55;
+        this.goalie.setVelocityX(Phaser.Math.Between(startSpeed, startSpeed + 480));
         this.goalie.play('fly_anim');
         this.ball.setVisible(true);
         this.ball.setPosition(360, 1100);
@@ -298,7 +320,7 @@ export class MainScene extends Phaser.Scene {
         gb.lineStyle(2, 0x000000);
         gb.strokeCircle(20, 20, 19);
         gb.generateTexture('ball', 40, 40);
-}
+    }
 
     getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;

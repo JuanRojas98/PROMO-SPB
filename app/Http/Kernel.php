@@ -60,6 +60,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'game' => \App\Http\Middleware\Game::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'invoice.played' => \App\Http\Middleware\InvoicePlayed::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'precognitive' => \Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests::class,
         'role' => \App\Http\Middleware\Role::class,

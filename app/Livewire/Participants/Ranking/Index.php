@@ -11,6 +11,7 @@ class Index extends Component
 {
     public $ranking = [];
     public $currentUserPoints = 0;
+    public $currentUserPointsPending = 0;
     public $currentUserPosition = null;
 
     public function render()
@@ -33,6 +34,13 @@ class Index extends Component
                     });
                 }
             ], 'points')
+            ->withSum([
+                'scores as total_points_pending' => function($query) {
+                    $query->whereHas('invoice', function($q) {
+                        $q->where('status', 'pending');
+                    });
+                }
+            ], 'points')
             ->orderByDesc('total_points')
             ->get();
 
@@ -41,6 +49,7 @@ class Index extends Component
         $currentUser = $ranking->firstWhere('id', Auth::user()->id);
 
         $this->currentUserPoints = $currentUser?->total_points ?? 0;
+        $this->currentUserPointsPending = $currentUser?->total_points_pending ?? 0;
         $this->currentUserPosition = $ranking->search(fn ($user) => $user->id === Auth::user()->id) + 1;
     }
 }

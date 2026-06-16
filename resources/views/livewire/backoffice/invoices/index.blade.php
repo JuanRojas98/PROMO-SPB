@@ -174,7 +174,7 @@
 
                                     <!-- Rechazar -->
                                     <button
-                                        wire:click="reject({{ $invoice->id }})"
+                                        wire:click="openRejectModal({{ $invoice->id }})"
                                         wire:loading.class="opacity-75 pointer-events-none"
                                         class="px-4 py-2 rounded-xl bg-red-200 text-red-700 font-bold hover:bg-red-300 transition"
                                     >
@@ -204,6 +204,34 @@
                 </tbody>
             </table>
         </div>
+
+        @if($showRejectModal)
+            <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50" style="margin-top: 0 !important;">
+                <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg p-6">
+                    <h3 class="text-2xl font-bold mb-4">
+                        Rechazar factura
+                    </h3>
+
+                    <p class="text-gray-600 mb-4">
+                        Escribe el motivo del rechazo.
+                    </p>
+
+                    <textarea wire:model="observations" rows="5" class="w-full border-gray-300 rounded-lg"
+                        placeholder="Ejemplo: La imagen está borrosa y no se puede validar el código..."></textarea>
+                    <x-input-error class="mt-2 text-xl text-red-500" :messages="$errors->get('observations')"/>
+
+                    <div class="flex justify-end gap-3 mt-6">
+                        <button wire:click="$set('showRejectModal', false)" class="px-4 py-2 rounded-lg bg-gray-200">
+                            Cancelar
+                        </button>
+
+                        <button wire:click="reject" class="px-4 py-2 rounded-lg bg-red-600 text-white">
+                            Confirmar rechazo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
 </div>
 

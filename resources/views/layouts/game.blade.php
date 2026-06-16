@@ -20,28 +20,15 @@
         message="Cargando aplicación..."
     />
 
-    <header class="absolute top-0 left-0 z-30 w-full py-2 px-5 lg:px-8 flex justify-between items-center">
-        <div class="flex">
-            @if (Auth::user())
-                <div class="w-[230px] p-2 rounded-full border border-white flex justify-center gap-2">
-                    <img src="{{ asset('images/usuario.png') }}" class="w-[25px] h-[25px]">
-                    <span class="font-semibold text-white uppercase text-center text-xl 2xl:text-2xl">
-                            {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}
-                        </span>
-                </div>
-            @endif
-        </div>
-        <div class="flex justify-between items-center gap-5">
-            <img src="{{ asset('images/logo_black_flag.png') }}" class="w-[46px] lg:w-[80px] 2xl:w-[132px]">
-            <img src="{{ asset('images/logo_rapid_repel.png') }}" class="w-[46px] lg:w-[80px] 2xl:w-[132px]">
-        </div>
-    </header>
+    @if (!request()->routeIs('participants.game'))
+        <livewire:layout.navigation-guest/>
+    @endif
 
     <div class="min-h-screen flex justify-center items-center">
         <div ></div>
         <div class="relative flex justify-center items-center">
-            <div class="absolute top-5 -left-10 z-50">
-                <a href="{{ route('participants.home') }}" class="cursor-pointer">
+            <div class="absolute top-7 md:top-20 left-3 md:-left-10 z-50">
+                <a href="{{ route('participants.home') }}" class="cursor-pointer" wire:navigate>
                     <img src="{{ asset('images/arrow-left.png') }}" class="w-[20px]">
                 </a>
             </div>

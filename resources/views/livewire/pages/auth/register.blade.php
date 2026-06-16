@@ -22,6 +22,8 @@ class extends Component {
     public string $document = '';
     public string $department_id = '';
     public string $city_id = '';
+    public string $password = '';
+    public string $password_confirmation = '';
     public bool $terms;
     public bool $personal_data;
 
@@ -60,6 +62,7 @@ class extends Component {
             'document' => ['required', 'string', 'max:10'],
             'department_id' => ['required'],
             'city_id' => ['required'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'terms' => ['required'],
             'personal_data' => ['required']
         ]);
@@ -76,14 +79,17 @@ class extends Component {
             'personal_data' => $this->personal_data
         ];
 
-        $user_data['password'] = Hash::make($this->document);
+        $user_data['password'] = Hash::make($this->password);
 
         event(new Registered($user = User::create($user_data)));
 
         $this->dispatch(
             'register-success',
-            message: '¡Registro exitoso! Ahora puedes iniciar sesión.'
+            message: '¡Tus datos han sido registrados!'
         );
+
+        Auth::login($user);
+        $this->redirect(route('participants.home'), navigate: true);
     }
 }; ?>
 
@@ -95,14 +101,14 @@ class extends Component {
 
     <form wire:submit="register" class="md:w-[400px]">
         <div class="grid grid-cols-2">
-            <div class="col-span-2 flex flex-col mb-1">
+            <div class="flex flex-col mb-1 mr-1">
                 <label for="first_name"
                        class="font-bold text-[20px] text-white ml-2 mb-1">Nombres</label>
                 <input type="text" id="first_name" name="first_name" wire:model="first_name"
                        class="py-1 px-5 bg-white rounded-lg text-lg" placeholder="Juan" required autofocus>
                 <x-input-error :messages="$errors->get('first_name')" class="mt-2"/>
             </div>
-            <div class="col-span-2 flex flex-col mb-1">
+            <div class="flex flex-col mb-1 ml-1">
                 <label for="last_name"
                        class="font-bold text-[20px] text-white ml-2 mb-1">Apellidos</label>
                 <input type="text" id="last_name" name="last_name" wire:model="last_name"
@@ -129,6 +135,23 @@ class extends Component {
                 <input type="number" id="document" name="document" wire:model="document"
                        class="py-1 px-5 bg-white rounded-lg text-lg" min="0" placeholder="101*******" required>
                 <x-input-error :messages="$errors->get('document')" class="mt-2"/>
+            </div>
+            <div class="flex flex-col mb-1 mr-1">
+                <label for="password" class="font-bold text-[20px] text-white ml-2 mb-1">
+                    Contraseña
+                </label>
+                <input type="password"  id="password"  wire:model="password"
+                    class="py-1 px-5 bg-white rounded-lg text-lg" placeholder="*********" required>
+                <x-input-error :messages="$errors->get('password')" class="mt-2"/>
+            </div>
+
+            <div class="flex flex-col mb-1 ml-1">
+                <label for="password_confirmation" class="font-bold text-[20px] text-white ml-2 mb-1">
+                    Confirmar contraseña
+                </label>
+                <input type="password" id="password_confirmation" wire:model="password_confirmation"
+                    class="py-1 px-5 bg-white rounded-lg text-lg" placeholder="*********" required>
+                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2"/>
             </div>
             <div class="flex flex-col mb-2 mr-1">
                 <label for="department_id"
@@ -203,11 +226,9 @@ class extends Component {
                 title: '¡Listo!',
                 text: event.detail.message,
                 icon: 'success',
-                confirmButtonText: 'Ir al login',
+                showConfirmButton: false,
                 allowOutsideClick: false
-            }).then(() => {
-                window.location.href = "{{ route('login') }}";
-            });
+            })
         });
     </script>
 @endpush

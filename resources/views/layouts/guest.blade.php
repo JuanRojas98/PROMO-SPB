@@ -43,8 +43,8 @@
                 justify-center items-center py-5 px-5 md:px-0">
                 @if (Auth::user())
                     @if (!request()->routeIs('participants.home'))
-                        <div class="absolute top-20 -left-10 z-50">
-                            <a href="{{ route('participants.home') }}" class="cursor-pointer">
+                        <div class="absolute top-20 left-7 lg:-left-10 z-50">
+                            <a href="{{ route('participants.home') }}" class="cursor-pointer" wire:navigate>
                                 <img src="{{ asset('images/arrow-left.png') }}" class="w-[20px]">
                             </a>
                         </div>
@@ -52,15 +52,11 @@
                 @endif
                 {{ $slot }}
 
-                <div class="mt-8 @if (!request()->routeIs('register')) lg:mt-0 lg:absolute lg:bottom-5 md:px-5 @endif">
-                    <p class="text-xs text-white">
-                        "Lea la etiqueta antes de usar el producto", "Ningún envase o empaque que haya contenido plaguicidas puede
-                        usarse para contener alimentos o agua, para consumo humano y animal" y "Manténgase fuera del alcance de los
-                        niños, alejado de animales y alimento". "Este(os) producto(s) no puede(n) aplicarse sobre las personas,
-                        plantas ni animales, tampoco sobre los alimentos" y "Después de la aplicación debe esperar el tiempo recomendado
-                        en la etiqueta antes de ingresar al lugar"
-                    </p>
-                </div>
+                @hasSection('footer')
+                    <div class="mt-8 @if (!request()->routeIs('register')) lg:mt-0 lg:absolute lg:bottom-5 md:px-5 @endif">
+                        @yield('footer')
+                    </div>
+                @endif
             </div>
         </div>
 

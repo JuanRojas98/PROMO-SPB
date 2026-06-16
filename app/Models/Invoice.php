@@ -14,9 +14,14 @@ class Invoice extends Model
         'invoice_code',
         'invoice_file',
         'status',
+        'observations',
         'validated_by',
         'validated_at',
     ];
+
+    public function score() {
+        return $this->hasOne(Score::class);
+    }
 
     public function user() {
         return $this->belongsTo(User::class);

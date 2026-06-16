@@ -24,7 +24,7 @@ Route::view('/', 'welcome')
 /**
  * PARTICIPANTS ROUTES
  */
-Route::middleware(['auth', 'role:participant'])
+Route::middleware(['auth', 'role:participant', 'invoice.played'])
     ->prefix('participants')
     ->name('participants.')
     ->group(function () {
