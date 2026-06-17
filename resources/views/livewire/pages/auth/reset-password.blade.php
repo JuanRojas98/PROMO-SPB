@@ -114,7 +114,7 @@ new #[Layout('layouts.guest')] class extends Component
                 confirmButtonText: 'Aceptar',
                 allowOutsideClick: false
             }).then(() => {
-                window.location.href = event.url;
+                window.location.href = event.detail.url;
             });
         });
     </script>

@@ -288,7 +288,7 @@ class extends Component {
                 confirmButtonText: 'Continuar',
                 allowOutsideClick: false
             }).then(() => {
-                window.location.href = event.url;
+                window.location.href = event.detail.url;
             });
         });
 

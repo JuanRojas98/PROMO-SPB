@@ -146,11 +146,13 @@ class Index extends Component
             return false;
         }
 
-        return $invoice->update([
+        $invoice->update([
             'status' => $status,
             'observations' => $observations,
             'validated_by' => Auth::user()->id,
             'validated_at' => now()
         ]);
+
+        return $invoice->fresh();
     }
 }
