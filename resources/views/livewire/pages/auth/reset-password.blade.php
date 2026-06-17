@@ -55,8 +55,11 @@ new #[Layout('layouts.guest')] class extends Component
             return;
         }
 
-        Session::flash('status', __($status));
-        $this->redirectRoute('login', navigate: true);
+        $this->dispatch(
+            'reset-password-success',
+            message: 'Se ha restablecido tu contraseña, ahora ya puedes iniciar sesión.',
+            url: route('login')
+        );
     }
 }; ?>
 
@@ -99,3 +102,20 @@ new #[Layout('layouts.guest')] class extends Component
         </div>
     </form>
 </div>
+
+@script
+    <script>
+        window.addEventListener('reset-password-success', event => {
+            Swal.fire({
+                title: '¡Listo!',
+                text: event.detail.message,
+                icon: 'success',
+                showConfirmButton: true,
+                confirmButtonText: 'Aceptar',
+                allowOutsideClick: false
+            }).then(() => {
+                window.location.href = event.url;
+            });
+        });
+    </script>
+@endscript

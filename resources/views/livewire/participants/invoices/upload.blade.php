@@ -17,7 +17,6 @@
                 <x-input-error :messages="$errors->get('invoice_code')" class="mt-2 text-xl text-red-500"/>
             </div>
             <div class="flex flex-col justify-center items-center p-5 border border-dashed border-white rounded-2xl">
-
                 <label for="invoice_file" class="w-full cursor-pointer flex flex-col items-center">
                     <span class="font-black text-[24px] text-white text-center mb-2">
                         SUBE TU FACTURA
@@ -32,9 +31,7 @@
 
                 <input type="file" id="invoice_file" wire:model="invoice_file" class="hidden"
                     accept=".jpg, .jpeg, .png, .pdf, image/jpeg, image/png, application/pdf"/>
-
-                <x-input-error class="mt-2 text-xl text-red-500" :messages="$errors->get('invoice_file')"
-                />
+                <x-input-error class="mt-2 text-xl text-red-500" :messages="$errors->get('invoice_file')"/>
             </div>
         </div>
 
@@ -50,7 +47,7 @@
         </div>
 
         <div class="flex justify-center items-center mt-5">
-            <p class="text-lg text-yellow font-bold mb-0">
+            <p class="text-lg text-yellow text-center font-bold leading-5 md:leading-none mb-0">
                 ¡No te preocupes! Tan pronto como sea aprobada, verás tus puntos reflejados automáticamente en tu cuenta.
             </p>
         </div>
@@ -70,7 +67,6 @@
 @script
 <script>
     $wire.on('invoice-saved', (event) => {
-
         Swal.fire({
             title: '¡Factura registrada!',
             text: 'Ahora podrás participar en el juego.',

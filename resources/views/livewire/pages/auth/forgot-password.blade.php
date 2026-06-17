@@ -29,7 +29,10 @@ new #[Layout('layouts.guest')] class extends Component
 
         $this->reset('email');
 
-        session()->flash('status', __($status));
+        $this->dispatch(
+            'reset-success',
+            message: 'Se ha enviado un enlace a tu correo, revisa la bandeja de entrada.'
+        );
     }
 }; ?>
 
@@ -37,9 +40,6 @@ new #[Layout('layouts.guest')] class extends Component
     <div class="mb-4 text-white text-xl">
         {{ __('Ingresa tu dirección de correo electrónico y te enviaremos un enlace para restablecerla.') }}
     </div>
-
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <form wire:submit="sendPasswordResetLink">
         <div class="flex flex-col mb-3">
@@ -59,5 +59,27 @@ new #[Layout('layouts.guest')] class extends Component
                 ENVIAR
             </button>
         </div>
+
+        <div class="flex justify-center items-center">
+            <a href="{{ route('login') }}" class="font-bold text-xl text-yellow cursor-pointer mb-1"
+               wire:navigate>
+                Iniciar sesión
+            </a>
+        </div>
     </form>
 </div>
+
+@push('scripts')
+    <script>
+        window.addEventListener('reset-success', event => {
+            Swal.fire({
+                title: '¡Listo!',
+                text: event.detail.message,
+                icon: 'success',
+                showConfirmButton: true,
+                confirmButtonText: 'Aceptar',
+                allowOutsideClick: false
+            })
+        });
+    </script>
+@endpush

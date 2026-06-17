@@ -1,16 +1,16 @@
 <div class="w-full px-5 md:px-0 lg:w-[700px] 2xl:w-[800px]">
     <p class="font-semibold text-[28px] md:text-[48px] text-center text-white mb-0">
         <span class="text-green-400">{{ number_format($currentUserPoints) }} PTS (Aprobados)</span>
-        |
+        | <br class="md:hidden"/>
         <span class="text-yellow">{{ number_format($currentUserPointsPending) }} PTS (En validación)</span>
     </p>
     <h2 class="relative font-bold text-[48px] md:text-[70px] 2xl:text-[80px] text-center title-stroke tracking-wider mb-3">
         CLASIFICACIÓN:
         <span class="title-stroke-white">{{ $currentUserPosition }}</span>
     </h2>
-    <p class="font-black text-[25px] md:text-[40px] text-center text-white mb-8 flex flex-col md:flex-row justify-center items-center">
+    <p class="font-black text-[25px] md:text-[40px] text-center text-black mb-8 flex flex-col md:flex-row justify-center items-center">
         TERMINA EN
-        <span class="block px-3 bg-yellow text-black rounded-full md:ml-3">
+        <span class="block px-3 bg-yellow text-green-dark rounded-full md:ml-3">
             <span id="days">0</span> día(s)
             y
             <span id="hours">0</span> hora(s)
