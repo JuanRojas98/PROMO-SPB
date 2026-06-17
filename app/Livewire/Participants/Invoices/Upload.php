@@ -34,8 +34,10 @@ class Upload extends Component
     public function saveInvoice() {
         $this->validate();
 
-        $exists = Invoice::where('invoice_code', $this->invoice_code)
-            ->whereIn('status', ['pending', 'approved'])
+        $exists = Invoice::where([
+            'invoice_code' => $this->invoice_code,
+            'user_id' => Auth::user()->id
+        ])->whereIn('status', ['pending', 'approved'])
             ->exists();
 
         if ($exists) {

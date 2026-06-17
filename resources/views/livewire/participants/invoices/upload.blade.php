@@ -51,7 +51,7 @@
 
         <div class="flex justify-center items-center mt-5">
             <p class="text-lg text-yellow font-bold mb-0">
-                Recuerda que tus puntos entrán en un proceso de validación.
+                ¡No te preocupes! Tan pronto como sea aprobada, verás tus puntos reflejados automáticamente en tu cuenta.
             </p>
         </div>
     </form>

@@ -219,6 +219,14 @@ class extends Component {
     </form>
 </div>
 
+@section('footer')
+    <p class="text-sm text-white text-center">
+        Oferta válida del 15 de Junio de 2026 al 15 de Julio de 2026 <br>
+        <a href="#" class="text-yellow underline">Consulta términos y condiciones</a> en activatupasion.com <br>
+        © 2026 Rapid Repel & Black Flag. Todos los derechos reservados.
+    </p>
+@endsection
+
 @push('scripts')
     <script>
         window.addEventListener('register-success', event => {

@@ -67,11 +67,24 @@ class extends Component {
             </button>
         </div>
 
-        <div class="flex justify-center items-center">
-            <a href="{{ route('password.request') }}" class="font-bold text-xl text-yellow cursor-pointer"
+        <div class="flex flex-col justify-center items-center">
+            <a href="{{ route('password.request') }}" class="font-bold text-xl text-yellow cursor-pointer mb-1"
                 wire:navigate>
                 ¿Olvidaste tú contraseña?
+            </a>
+
+            <a href="{{ route('register') }}" class="font-bold text-xl text-white cursor-pointer"
+               wire:navigate>
+                ¿Aún no tienes una cuenta? <span class="text-yellow">Registrate</span> para participar.
             </a>
         </div>
     </form>
 </div>
+
+@section('footer')
+    <p class="text-sm text-white text-center">
+        Oferta válida del 15 de Junio de 2026 al 15 de Julio de 2026 <br>
+        <a href="#" class="text-yellow underline">Consulta términos y condiciones</a> en activatupasion.com <br>
+        © 2026 Rapid Repel & Black Flag. Todos los derechos reservados.
+    </p>
+@endsection
