@@ -62,6 +62,10 @@
             </div>
         </div>
 
+        <a href="#" target="_blank" class="fixed bottom-5 right-5 rounded-full bg-[#25d366]/70 p-3">
+            <img src="{{ asset('images/whatsapp.svg') }}" class="w-[25px] h-[25px] "/>
+        </a>
+
         @stack('scripts')
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>

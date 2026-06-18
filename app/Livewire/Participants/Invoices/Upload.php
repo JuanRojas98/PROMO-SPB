@@ -15,14 +15,14 @@ class Upload extends Component
 
     protected $rules = [
         'invoice_code' => 'required',
-        'invoice_file' => 'required|mimes:jpg,png,pdf|max:2048'
+        'invoice_file' => 'required|mimes:jpg,png'
     ];
 
     protected $messages = [
         'invoice_code.required' => 'Digita el código de tu factura.',
         'invoice_code.unique' => 'Esta factura ya fue registrada.',
         'invoice_file.required' => 'Debes subir tu factura.',
-        'invoice_file.mimes' => 'El archivo debe ser JPG, PNG o PDF.',
+        'invoice_file.mimes' => 'El archivo debe ser JPG o PNG.'
     ];
 
     public function render()

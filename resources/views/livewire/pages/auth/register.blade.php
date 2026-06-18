@@ -280,6 +280,7 @@ class extends Component {
 @push('scripts')
     <script>
         window.addEventListener('register-success', event => {
+            console.log(event.detail);
             Swal.fire({
                 title: '¡Listo!',
                 text: event.detail.message,

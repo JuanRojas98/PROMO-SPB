@@ -25,12 +25,22 @@
                     @if ($invoice_file)
                         <img src="{{ $invoice_file->temporaryUrl() }}" class="w-[85px] h-[85px]">
                     @else
-                        <img src="{{ asset('images/upload_icon.png') }}" class="w-[85px] h-[85px] opacity-30">
+                        <img src="{{ asset('images/upload_icon.png') }}" class="w-[85px] h-[85px] opacity-30"
+                             wire:target="invoice_file"
+                             wire:loading.class="hidden">
+                        <div class="flex flex-col justify-center items-center gap-5"
+                             wire:loading wire:target="invoice_file">
+{{--                            <div class="w-20 h-20 border-4 border-yellow border-t-transparent rounded-full animate-spin"></div>--}}
+
+                            <p class="text-yellow text-xl font-bold tracking-wider">
+                                Subiendo imagen, por favor espera...
+                            </p>
+                        </div>
                     @endif
                 </label>
 
                 <input type="file" id="invoice_file" wire:model="invoice_file" class="hidden"
-                    accept=".jpg, .jpeg, .png, .pdf, image/jpeg, image/png, application/pdf"/>
+                    accept=".jpg, .jpeg, .png, .pdf, image/jpeg, image/png"/>
                 <x-input-error class="mt-2 text-xl text-red-500" :messages="$errors->get('invoice_file')"/>
             </div>
         </div>
