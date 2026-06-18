@@ -41,8 +41,8 @@
                         class="block lg:hidden max-w-none w-[240px] md:w-[340px] lg:w-[480px] object-contain drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] z-50">
                 </div>
             </div>
-            <div class="relative flex flex-col @if (!request()->routeIs('register')) lg:flex-row @endif
-                justify-center items-center py-5 px-5 md:px-0">
+            <div class="relative flex flex-col
+                justify-center items-center py-5 px-5 md:px-0 lg:pt-20">
                 @if (Auth::user())
                     @if (!request()->routeIs('participants.home'))
                         <div class="absolute top-20 left-7 lg:-left-10 z-50">
@@ -55,14 +55,15 @@
                 {{ $slot }}
 
                 @hasSection('footer')
-                    <div class="mt-8 @if (!request()->routeIs('register')) lg:mt-0 lg:absolute lg:bottom-5 md:px-5 @endif">
+                    <div class="mt-8 max-w-[600px]">
                         @yield('footer')
                     </div>
                 @endif
             </div>
         </div>
 
-        <a href="#" target="_blank" class="fixed bottom-5 right-5 rounded-full bg-[#25d366]/70 p-3">
+        <a href="https://wa.me/573001139619?text=Hola%2C%20tengo%20una%20consulta%20sobre%20la%20promoci%C3%B3n.%20%C2%BFPodr%C3%ADan%20ayudarme%20por%20favor%3F"
+            target="_blank" class="fixed bottom-5 right-5 rounded-full bg-[#25d366]/70 p-3">
             <img src="{{ asset('images/whatsapp.svg') }}" class="w-[25px] h-[25px] "/>
         </a>
 

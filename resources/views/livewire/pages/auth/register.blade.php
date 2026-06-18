@@ -140,14 +140,14 @@ class extends Component {
                        class="py-1 px-5 bg-white rounded-lg text-lg" placeholder="Perez" required>
                 <x-input-error :messages="$errors->get('last_name')" class="mt-2"/>
             </div>
-            <div class="col-span-2 flex flex-col mb-1">
+            <div class="flex flex-col mb-1 mr-1">
                 <label for="email"
                        class="font-bold text-[20px] text-white ml-2 mb-1">Correo</label>
                 <input type="email" id="email" name="email" wire:model="email"
                        class="py-1 px-5 bg-white rounded-lg text-lg" placeholder="correo@correo.com" required>
                 <x-input-error :messages="$errors->get('email')" class="mt-2"/>
             </div>
-            <div class="col-span-2 flex flex-col mb-1">
+            <div class="flex flex-col mb-1 ml-1">
                 <label for="phone"
                        class="font-bold text-[20px] text-white ml-2 mb-1">Teléfono</label>
                 <input type="number" id="phone" name="phone" wire:model="phone"
@@ -261,9 +261,9 @@ class extends Component {
         </div>
 
         <div class="flex justify-center items-center">
-            <a href="{{ route('login') }}" class="font-bold text-xl text-yellow cursor-pointer mb-1"
+            <a href="{{ route('login') }}" class="font-bold text-xl text-white cursor-pointer mb-1"
                wire:navigate>
-                Iniciar sesión
+                ¿Ya tienes cuenta? <span class="text-yellow">Inicia sesión</span> para participar.
             </a>
         </div>
     </form>
@@ -273,6 +273,15 @@ class extends Component {
     <p class="text-sm text-white text-center">
         Oferta válida del 15 de Junio de 2026 al 15 de Julio de 2026 <br>
         <a href="#" class="text-yellow underline">Consulta términos y condiciones</a> en activatupasion.com <br>
+
+        "Lea la etiqueta antes de usar el producto", "Ningún envase o empaque que haya contenido plaguicidas puede
+        usarse para contener alimentos o agua, para consumo humano y animal" y "Manténgase fuera del alcance de los
+        niños, alejado de animales y alimento". "Este(os) producto(s) no puede(n) aplicarse sobre las personas,
+        plantas ni animales, tampoco sobre los alimentos" y "Después de la aplicación debe esperar el tiempo recomendado
+        en la etiqueta antes de ingresar al lugar".
+
+        <br>
+
         © 2026 Rapid Repel & Black Flag. Todos los derechos reservados.
     </p>
 @endsection

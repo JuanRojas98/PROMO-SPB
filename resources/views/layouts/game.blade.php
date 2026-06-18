@@ -39,7 +39,8 @@
         </div>
     </div>
 
-    <a href="#" target="_blank" class="fixed bottom-5 right-5 rounded-full bg-[#25d366] p-3">
+    <a href="https://wa.me/573001139619?text=Hola%2C%20tengo%20una%20consulta%20sobre%20la%20promoci%C3%B3n.%20%C2%BFPodr%C3%ADan%20ayudarme%20por%20favor%3F"
+        target="_blank" class="fixed bottom-5 right-5 rounded-full bg-[#25d366]/70 p-3">
         <img src="{{ asset('images/whatsapp.svg') }}" class="w-[25px] h-[25px] "/>
     </a>
 

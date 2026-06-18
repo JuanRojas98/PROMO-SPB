@@ -61,9 +61,9 @@ new #[Layout('layouts.guest')] class extends Component
         </div>
 
         <div class="flex justify-center items-center">
-            <a href="{{ route('login') }}" class="font-bold text-xl text-yellow cursor-pointer mb-1"
+            <a href="{{ route('login') }}" class="font-bold text-xl text-white cursor-pointer mb-1"
                wire:navigate>
-                Iniciar sesión
+                ¿Ya tienes cuenta? <span class="text-yellow">Inicia sesión</span> para participar.
             </a>
         </div>
     </form>
