@@ -48,8 +48,21 @@
 
                     {{-- Footer --}}
                     <tr>
-                        <td style="background:#00543D; border-top:5px solid #FDB913; padding:30px; color:#ffffff; font-size:14px; line-height:22px;">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ex arcu, aliquam at condimentum et, rhoncus ut sapien. Maecenas sapien velit, malesuada id est vitae, convallis egestas turpis. Suspendisse potenti. Proin gravida iaculis massa, quis pulvinar dolor placerat ac. Maecenas est arcu, imperdiet vel dolor eu, tempus tempus augue. Nullam dignissim iaculis dolor, quis dictum turpis porta a. Sed scelerisque tristique risus, vitae molestie odio egestas nec. Mauris ultrices nibh eu tristique venenatis. In hac habitasse platea dictumst. Etiam in lectus venenatis, tempor tortor elementum, aliquam leo.
+                        <td style="background:#00543D; border-top:5px solid #FDB913; padding:30px; color:#ffffff; font-size:14px; line-height:22px; text-align: center">
+                            Oferta válida del 15 de Junio de 2026 al 15 de Julio de 2026 <br>
+                            <a href="https://activatupasion.com/T%C3%A9rminos%20y%20Condiciones%20de%20la%20Promocion%20-%20Activa%20tu%20pasi%C3%B3n.pdf" class="text-yellow underline">
+                                Consulta términos y condiciones
+                            </a> en activatupasion.com <br>
+
+                            "Lea la etiqueta antes de usar el producto", "Ningún envase o empaque que haya contenido plaguicidas puede
+                            usarse para contener alimentos o agua, para consumo humano y animal" y "Manténgase fuera del alcance de los
+                            niños, alejado de animales y alimento". "Este(os) producto(s) no puede(n) aplicarse sobre las personas,
+                            plantas ni animales, tampoco sobre los alimentos" y "Después de la aplicación debe esperar el tiempo recomendado
+                            en la etiqueta antes de ingresar al lugar".
+
+                            <br>
+
+                            © 2026 Rapid Repel & Black Flag. Todos los derechos reservados.
                         </td>
                     </tr>
                 </table>

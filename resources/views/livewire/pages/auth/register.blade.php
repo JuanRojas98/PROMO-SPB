@@ -229,7 +229,7 @@ class extends Component {
                        required>
                 <label for="terms" class="select-none ms-2 text-[18px] font-bold text-white">
                     Acepto los
-                    <a href="https://activatusvacaciones.com/terminos-condiciones.pdf" target="_blank"
+                    <a href="https://activatupasion.com/T%C3%A9rminos%20y%20Condiciones%20de%20la%20Promocion%20-%20Activa%20tu%20pasi%C3%B3n.pdf" target="_blank"
                        class="text-yellow underline">
                         términos y condiciones
                     </a>
@@ -241,7 +241,7 @@ class extends Component {
                        required>
                 <label for="personal_data_checkbox" class="select-none ms-2 text-[18px] font-bold text-white">
                     Acepto el
-                    <a href="https://activatusvacaciones.com/terminos-condiciones.pdf" target="_blank"
+                    <a href="https://activatupasion.com/T%C3%A9rminos%20y%20Condiciones%20de%20la%20Promocion%20-%20Activa%20tu%20pasi%C3%B3n.pdf" target="_blank"
                        class="text-yellow underline">
                         tratamiento de datos personales
                     </a>
@@ -272,7 +272,9 @@ class extends Component {
 @section('footer')
     <p class="text-sm text-white text-center">
         Oferta válida del 15 de Junio de 2026 al 15 de Julio de 2026 <br>
-        <a href="#" class="text-yellow underline">Consulta términos y condiciones</a> en activatupasion.com <br>
+        <a href="https://activatupasion.com/T%C3%A9rminos%20y%20Condiciones%20de%20la%20Promocion%20-%20Activa%20tu%20pasi%C3%B3n.pdf" class="text-yellow underline">
+            Consulta términos y condiciones
+        </a> en activatupasion.com <br>
 
         "Lea la etiqueta antes de usar el producto", "Ningún envase o empaque que haya contenido plaguicidas puede
         usarse para contener alimentos o agua, para consumo humano y animal" y "Manténgase fuera del alcance de los

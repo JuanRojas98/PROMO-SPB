@@ -16,7 +16,9 @@
     @section('footer')
         <p class="text-sm text-white text-center">
             Oferta válida del 15 de Junio de 2026 al 15 de Julio de 2026 <br>
-            <a href="#" class="text-yellow underline">Consulta términos y condiciones</a> en activatupasion.com <br>
+            <a href="https://activatupasion.com/T%C3%A9rminos%20y%20Condiciones%20de%20la%20Promocion%20-%20Activa%20tu%20pasi%C3%B3n.pdf" class="text-yellow underline">
+                Consulta términos y condiciones
+            </a> en activatupasion.com <br>
             © 2026 Rapid Repel & Black Flag. Todos los derechos reservados.
         </p>
     @endsection
