@@ -9,7 +9,7 @@ export class PreloadScene extends Phaser.Scene {
         this.load.image('ball', 'ball.png');
         this.load.image('bug', 'bug.png');
         this.load.image('catch', 'catch.png');
-        this.load.spritesheet('fly', 'fly.png', { frameWidth: 1043.8, frameHeight: 773 } );
+        this.load.spritesheet('fly', 'fly_compressed.png', { frameWidth: 1043.8, frameHeight: 773 } );
         this.load.spritesheet('cry', 'cry.png', { frameWidth: 1025.8, frameHeight: 773 } );
         this.load.image('iddle', 'iddle.png');
         this.load.image('logo1', 'logo1.png');
