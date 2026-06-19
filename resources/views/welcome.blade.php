@@ -24,7 +24,6 @@
 
     @section('footer')
         <p class="text-sm text-white text-center">
-
             "Lea la etiqueta antes de usar el producto", "Ningún envase o empaque que haya contenido plaguicidas puede
             usarse para contener alimentos o agua, para consumo humano y animal" y "Manténgase fuera del alcance de los
             niños, alejado de animales y alimento". "Este(os) producto(s) no puede(n) aplicarse sobre las personas,
