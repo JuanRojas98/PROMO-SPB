@@ -14,13 +14,24 @@
                 </p>
             </div>
 
-            <div class="px-4 py-2 rounded-xl text-primary font-bold text-xl">
-                {{ $invoices->count() }} pendientes
+            <div class="px-4 py-2 rounded-xl font-bold text-xl
+                {{ $state === 'approved' ? 'text-green-700' : ($state === 'rejected' ? 'text-red-700' : 'text-orange-700') }}">
+                {{ $invoices->count() }}
+                @switch ($state)
+                    @case ('approved')
+                        aprobado(s)
+                        @break
+                    @case ('rejected')
+                        rechazado(s)
+                        @break
+                    @case ('pending')
+                        pendiente(s)
+                @endswitch
             </div>
         </div>
 
         <div class="px-6" style="margin-top: 0 !important;">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
                 <div class="space-y-2">
                     <x-input-label for="document" :value="__('Cédula')"
                         class="text-xl text-gray-900"/>
@@ -51,6 +62,17 @@
                                 {{ $city->name }}
                             </option>
                         @endforeach
+                    </select>
+                </div>
+                <div class="space-y-2">
+                    <x-input-label for="city_id" :value="__('Estado')"
+                        class="text-xl text-gray-900"/>
+                    <select wire:model.live="state" id="state" name="state"
+                        class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-lg">
+                        <option value>--Seleccione--</option>
+                        <option value="pending">Pendiente</option>
+                        <option value="approved">Aprobado</option>
+                        <option value="rejected">Rechazado</option>
                     </select>
                 </div>
             </div>
@@ -93,7 +115,8 @@
 
                 <tbody class="divide-y divide-gray-100">
                     @forelse($invoices as $invoice)
-                        <tr class="hover:bg-gray-50 transition-colors duration-200 text-lg">
+                        <tr class="hover:bg-gray-50 transition-colors duration-200 text-lg
+                            {{ $invoice->status === 'approved' ? 'bg-green-100' : ($invoice->status === 'rejected' ? 'bg-red-100' : 'bg-orange-100') }}">
                             <!-- ID -->
                             <td class="px-6 py-5 font-bold text-gray-900">
                                 {{ $invoice->id }}
@@ -160,29 +183,30 @@
 
                             <!-- Acciones -->
                             <td class="px-6 py-5">
-                                <div class="flex items-center justify-center gap-3">
-                                    <!-- Aprobar -->
-                                    <button
-                                        wire:click="approve({{ $invoice->id }})"
-                                        wire:loading.class="opacity-75 pointer-events-none"
-                                        class="px-4 py-2 rounded-xl bg-blue-200 text-blue-700 font-bold hover:bg-blue-300 transition"
-                                    >
-                                        <div wire:loading wire:target="approve"
-                                             class="w-4 h-4 border-4 border-white border-t-transparent mr-2 rounded-full animate-spin"></div>
-                                        Aprobar
-                                    </button>
+                                @if ($invoice->status === 'pending')
+                                    <div class="flex items-center justify-center gap-3">
+                                        <!-- Aprobar -->
+                                        <button wire:click="$dispatch('approve-invoice', { id: {{ $invoice->id }} })"
+                                            class="px-4 py-2 rounded-xl bg-blue-200 text-blue-700 font-bold hover:bg-blue-300 transition">
+                                            Aprobar
+                                        </button>
 
-                                    <!-- Rechazar -->
-                                    <button
-                                        wire:click="openRejectModal({{ $invoice->id }})"
-                                        wire:loading.class="opacity-75 pointer-events-none"
-                                        class="px-4 py-2 rounded-xl bg-red-200 text-red-700 font-bold hover:bg-red-300 transition"
-                                    >
-                                        <div wire:loading wire:target="reject"
-                                             class="w-4 h-4 border-4 border-white border-t-transparent mr-2 rounded-full animate-spin"></div>
-                                        Rechazar
-                                    </button>
-                                </div>
+                                        <!-- Rechazar -->
+                                        <button wire:click="$dispatch('reject-invoice', { id: {{ $invoice->id }} })"
+                                            class="px-4 py-2 rounded-xl bg-red-200 text-red-700 font-bold hover:bg-red-300 transition">
+                                            Rechazar
+                                        </button>
+                                    </div>
+                                @else
+                                    @switch ($invoice->status)
+                                        @case ('approved')
+                                            <span class="text-green-700">Aprobado</span>
+                                            @break
+                                        @case ('rejected')
+                                            <span class="text-red-700">Rechazado</span>
+                                            @break
+                                    @endswitch
+                                @endif
                             </td>
                         </tr>
                     @empty
@@ -204,35 +228,9 @@
                 </tbody>
             </table>
         </div>
-
-        @if($showRejectModal)
-            <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50" style="margin-top: 0 !important;">
-                <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg p-6">
-                    <h3 class="text-2xl font-bold mb-4">
-                        Rechazar factura
-                    </h3>
-
-                    <p class="text-gray-600 mb-4">
-                        Escribe el motivo del rechazo.
-                    </p>
-
-                    <textarea wire:model="observations" rows="5" class="w-full border-gray-300 rounded-lg"
-                        placeholder="Ejemplo: La imagen está borrosa y no se puede validar el código..."></textarea>
-                    <x-input-error class="mt-2 text-xl text-red-500" :messages="$errors->get('observations')"/>
-
-                    <div class="flex justify-end gap-3 mt-6">
-                        <button wire:click="$set('showRejectModal', false)" class="px-4 py-2 rounded-lg bg-gray-200">
-                            Cancelar
-                        </button>
-
-                        <button wire:click="reject" class="px-4 py-2 rounded-lg bg-red-600 text-white">
-                            Confirmar rechazo
-                        </button>
-                    </div>
-                </div>
-            </div>
-        @endif
     </div>
+
+    <livewire:backoffice.invoices.invoice-validate/>
 </div>
 
 @script

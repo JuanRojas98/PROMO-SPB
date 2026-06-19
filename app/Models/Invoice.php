@@ -15,6 +15,7 @@ class Invoice extends Model
         'invoice_file',
         'status',
         'observations',
+        'points',
         'validated_by',
         'validated_at',
     ];

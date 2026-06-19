@@ -17,11 +17,11 @@ class Index extends Component
     public $departments = [];
     public $invoices = [];
 
-    public $document, $department_id, $city_id;
+    public $document, $department_id, $city_id, $state = 'pending';
 
-    public $showRejectModal = false;
-    public $invoice_id_to_reject = null;
-    public $observations = '';
+    protected $listeners = [
+        'invoice-saved' => '$refresh',
+    ];
 
     public function render()
     {
@@ -30,7 +30,6 @@ class Index extends Component
                 'user',
                 'user.city'
             ])
-            ->where('status', 'pending')
             ->when($this->document, function ($query) {
                 $query->whereHas('user', function ($queryUser) {
                     $queryUser->where('document', 'LIKE', '%' . $this->document . '%');
@@ -48,6 +47,9 @@ class Index extends Component
                 $query->whereHas('user', function ($queryUser) {
                     $queryUser->where('city_id', $this->city_id);
                 });
+            })
+            ->when($this->state, function ($query) {
+                $query->where('status', $this->state);
             });
 
         $this->invoices = $queryInvoices->latest()->get();
@@ -76,83 +78,5 @@ class Index extends Component
         }
     }
 
-    public function openRejectModal($invoice_id) {
-        $this->invoice_id_to_reject = $invoice_id;
-        $this->observation = '';
-        $this->showRejectModal = true;
-    }
-
-    public function approve($id) {
-        $invoice = $this->updateInvoiceStatus($id, 'approved');
-
-        if (!$invoice) {
-            return $this->dispatch(
-                'invoice-approved',
-                message: 'La factura ya fue gestionada.'
-            );
-        }
-
-        $this->dispatch(
-            'invoice-approved',
-            message: 'Factura aprobada correctamente.'
-        );
-    }
-
-    public function reject() {
-        $this->validate(
-            ['observations' => 'required|min:10'],
-            [
-                'observation.required' => 'La observación es obligatoria.',
-                'observation.min' => 'La observación debe tener al menos 10 caracteres.',
-            ]
-        );
-
-        $invoice = $this->updateInvoiceStatus($this->invoice_id_to_reject, 'rejected', $this->observations);
-
-        $this->showRejectModal = false;
-        $this->invoice_id_to_reject = null;
-        $this->observation = '';
-
-        if (!$invoice) {
-            return $this->dispatch(
-                'invoice-rejected',
-                message: 'La factura ya fue gestionada.'
-            );
-        }
-
-        $this->sendEmail(
-            $invoice->user->email,
-            'Factura rechadaza',
-            'emails.invoice-reject',
-            [
-                'user' => $invoice->user,
-                'invoice' => $invoice
-            ]
-        );
-
-        $this->dispatch(
-            'invoice-rejected',
-            message: 'Factura rechazada correctamente.'
-        );
-    }
-
-    public function updateInvoiceStatus($id, $status, $observations = null) {
-        $invoice = Invoice::where([
-            'id' => $id,
-            'status' => 'pending'
-        ])->first();
-
-        if (! $invoice) {
-            return false;
-        }
-
-        $invoice->update([
-            'status' => $status,
-            'observations' => $observations,
-            'validated_by' => Auth::user()->id,
-            'validated_at' => now()
-        ]);
-
-        return $invoice->fresh();
-    }
+    public function refresh() {}
 }
