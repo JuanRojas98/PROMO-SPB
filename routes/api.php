@@ -19,6 +19,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/ping', function () {
+    return response()->json(['message' => 'Hola mundo']);
+});
+
 Route::get('/check-document/{document}', function (string $document) {
     $exists = User::where('document', $document)->exists();
 
