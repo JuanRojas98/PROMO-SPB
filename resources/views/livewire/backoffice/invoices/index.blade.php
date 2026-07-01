@@ -198,14 +198,23 @@
                                         </button>
                                     </div>
                                 @else
-                                    @switch ($invoice->status)
-                                        @case ('approved')
-                                            <span class="text-green-700">Aprobado</span>
-                                            @break
-                                        @case ('rejected')
-                                            <span class="text-red-700">Rechazado</span>
-                                            @break
-                                    @endswitch
+                                    <div class="flex items-center justify-center gap-3">
+                                        @switch ($invoice->status)
+                                            @case ('approved')
+                                                <span class="text-green-700">Aprobado</span>
+                                                @break
+                                            @case ('rejected')
+                                                <span class="text-red-700">Rechazado</span>
+                                                @break
+                                        @endswitch
+
+                                        <button wire:click="restartProcess({{$invoice->id}})"
+                                            class="px-4 py-2 rounded-xl bg-orange-100 text-orange-700 font-bold hover:bg-orange-300 transition"
+                                            wire:loading.class="opacity-75 pointer-events-none"
+                                            wire:target="restartProcess({{$invoice->id}})">
+                                            Reiniciar gestión
+                                        </button>
+                                    </div>
                                 @endif
                             </td>
                         </tr>
@@ -228,6 +237,18 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="flex justify-center items-center md:justify-end mb-3">
+            @if ($invoices->count() > 0)
+                <form action="{{ route('backoffice.invoices.export', ['status' => $state]) }}" method="GET">
+                    @csrf
+                    <button type="submit" class="px-4 py-2 rounded-xl bg-blue-200 text-blue-700
+                        font-bold hover:bg-blue-300 transition mb-3">
+                        Descargar reporte
+                    </button>
+                </form>
+            @endif
+        </div>
     </div>
 
     <livewire:backoffice.invoices.invoice-validate/>
@@ -245,12 +266,22 @@
             });
         });
 
-        $wire.on('invoice-rejected', (event) => {
+        $wire.on('invoice-reset', (event) => {
             Swal.fire({
                 title: '¡Listo!',
                 text: event.message,
-                icon: 'warning',
+                icon: 'success',
                 confirmButtonText: 'Continuar',
+                allowOutsideClick: false
+            });
+        });
+
+        $wire.on('invoice-reset-fail', (event) => {
+            Swal.fire({
+                title: '¡Oops!',
+                text: event.message,
+                icon: 'success',
+                cancelButtonText: 'Cerrar',
                 allowOutsideClick: false
             });
         });

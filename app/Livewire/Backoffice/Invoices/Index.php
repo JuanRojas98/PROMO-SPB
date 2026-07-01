@@ -78,5 +78,26 @@ class Index extends Component
         }
     }
 
+    public function restartProcess($invoice_id) {
+        $invoice = Invoice::where([
+            'id' => $invoice_id,
+        ])->whereIn('status', ['approved', 'rejected'])->first();
+
+        if (! $invoice) {
+            $this->dispatch('invoice-reset-fail', message: 'No se encuentra la factura.');
+        }
+
+        $invoice->update([
+            'status' => 'pending',
+            'observations' => null,
+            'points' => 0,
+            'validated_by' => null,
+            'validated_at' => null
+        ]);
+
+        $this->dispatch('invoice-saved');
+        $this->dispatch('invoice-reset', message: 'Ya puedes volver a gestionar esta factura.');
+    }
+
     public function refresh() {}
 }

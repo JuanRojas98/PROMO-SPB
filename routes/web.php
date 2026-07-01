@@ -1,6 +1,8 @@
 <?php
 
+use App\Exports\InvoicesExport;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\InvoiceController;
 use App\Livewire\Backoffice\Invoices\Index as BackofficeInvoicesIndex;
 use App\Livewire\Participants\Invoices\Upload;
 use App\Livewire\Participants\Ranking\Index as ParticipantRankingIndex;
@@ -69,6 +71,8 @@ Route::middleware(['auth', 'role:backoffice'])
      */
     Route::get('/invoices', BackofficeInvoicesIndex::class)
         ->name('invoices');
+    Route::get('/invoices/export/{status?}', [InvoiceController::class, 'export'])
+        ->name('invoices.export');
 });
 
 /**
